@@ -1,0 +1,485 @@
+/* =====================================================
+   USER DASHBOARD
+===================================================== */
+
+.user-dashboard {
+  min-height: 100vh;
+  padding: 40px;
+  background: linear-gradient(135deg, #eef5ff 0%, #f8fbff 50%, #ffffff 100%);
+  position: relative;
+  overflow: hidden;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* Background Decorations */
+
+.user-dashboard::before {
+  content: "";
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  background: rgba(37, 99, 235, 0.08);
+  border-radius: 50%;
+  top: -220px;
+  right: -180px;
+}
+
+.user-dashboard::after {
+  content: "";
+  position: absolute;
+  width: 360px;
+  height: 360px;
+  background: rgba(34, 197, 94, 0.08);
+  border-radius: 50%;
+  bottom: -160px;
+  left: -100px;
+}
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.user-hero {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+
+  color: white;
+
+  padding: 40px;
+
+  border-radius: 24px;
+
+  margin-bottom: 45px;
+
+  overflow: hidden;
+
+  box-shadow: 0 18px 45px rgba(37, 99, 235, .28);
+}
+
+.user-hero::before {
+  content: "";
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  background: rgba(255,255,255,.08);
+  border-radius: 50%;
+  right: -70px;
+  top: -70px;
+}
+
+.user-hero::after {
+  content: "";
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  background: rgba(255,255,255,.05);
+  border-radius: 50%;
+  left: -60px;
+  bottom: -60px;
+}
+
+.hero-content{
+  position: relative;
+  z-index: 2;
+}
+
+.hero-content h1{
+  margin:0;
+  font-size:38px;
+  font-weight:700;
+}
+
+.hero-content p{
+  margin-top:12px;
+  color:#dbeafe;
+  line-height:1.8;
+  font-size:17px;
+}
+
+.hero-right{
+  position:relative;
+  z-index:2;
+  text-align:center;
+}
+
+.hero-icon{
+
+  width:95px;
+  height:95px;
+
+  border-radius:50%;
+
+  background:rgba(255,255,255,.18);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:42px;
+
+  margin:auto;
+}
+
+.hero-right h3{
+  margin-top:15px;
+  font-size:20px;
+}
+
+.hero-right p{
+  color:#dbeafe;
+  margin-top:6px;
+}
+
+.hero-date{
+  margin-top:15px;
+  font-size:14px;
+  color:#e2e8f0;
+}
+
+/* =====================================================
+   STATISTICS
+===================================================== */
+
+.user-stats{
+
+  position:relative;
+  z-index:2;
+
+  display:grid;
+
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+  gap:28px;
+
+  margin-bottom:45px;
+}
+
+.stat-card{
+
+  background:white;
+
+  border-radius:20px;
+
+  padding:28px;
+
+  display:flex;
+  align-items:center;
+  gap:20px;
+
+  border:1px solid #edf2f7;
+
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+  transition:.35s;
+}
+
+.stat-card:hover{
+
+  transform:translateY(-10px);
+
+  box-shadow:0 20px 40px rgba(37,99,235,.18);
+}
+
+.stat-icon{
+
+  width:72px;
+  height:72px;
+
+  border-radius:18px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  color:white;
+
+  font-size:30px;
+
+  flex-shrink:0;
+}
+
+.blue{
+  background:linear-gradient(135deg,#3b82f6,#2563eb);
+}
+
+.green{
+  background:linear-gradient(135deg,#22c55e,#15803d);
+}
+
+.orange{
+  background:linear-gradient(135deg,#fb923c,#ea580c);
+}
+
+.stat-card h4{
+  margin:0;
+  color:#64748b;
+  font-size:15px;
+}
+
+.stat-card h2{
+  margin-top:8px;
+  font-size:30px;
+  color:#0f172a;
+}
+
+/* =====================================================
+   SECTION TITLE
+===================================================== */
+
+.section-title{
+
+  position:relative;
+  z-index:2;
+
+  font-size:30px;
+
+  color:#1e293b;
+
+  margin-bottom:30px;
+
+  font-weight:700;
+}
+
+/* =====================================================
+   QUICK ACTION CARDS
+===================================================== */
+
+.user-cards{
+
+  position:relative;
+  z-index:2;
+
+  display:grid;
+
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+
+  gap:30px;
+}
+
+.user-card{
+
+  position:relative;
+
+  overflow:hidden;
+
+  background:white;
+
+  text-decoration:none;
+
+  color:inherit;
+
+  border-radius:22px;
+
+  padding:35px;
+
+  box-shadow:0 12px 30px rgba(0,0,0,.08);
+
+  transition:.35s;
+}
+
+.user-card::before{
+
+  content:"";
+
+  position:absolute;
+
+  width:130px;
+
+  height:130px;
+
+  background:#edf4ff;
+
+  border-radius:50%;
+
+  top:-45px;
+
+  right:-45px;
+
+  transition:.35s;
+}
+
+.user-card:hover{
+
+  transform:translateY(-12px);
+
+  box-shadow:0 22px 45px rgba(37,99,235,.18);
+}
+
+.user-card:hover::before{
+
+  transform:scale(1.2);
+}
+
+.user-icon{
+
+  width:82px;
+  height:82px;
+
+  border-radius:18px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  color:white;
+
+  font-size:34px;
+
+  margin-bottom:25px;
+}
+
+.events-icon{
+  background:linear-gradient(135deg,#3b82f6,#2563eb);
+}
+
+.booking-icon{
+  background:linear-gradient(135deg,#22c55e,#15803d);
+}
+
+.profile-icon{
+  background:linear-gradient(135deg,#fb923c,#ea580c);
+}
+
+.user-card h3{
+  color:#1e293b;
+  font-size:24px;
+  margin-bottom:14px;
+}
+
+.user-card p{
+  color:#64748b;
+  line-height:1.8;
+  margin-bottom:30px;
+}
+
+.user-card span{
+
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:8px;
+
+  padding:12px 22px;
+
+  background:linear-gradient(135deg,#2563eb,#1d4ed8);
+
+  color:white;
+
+  border-radius:12px;
+
+  font-weight:600;
+
+  transition:.3s;
+}
+
+.user-card:hover span{
+
+  transform:translateX(8px);
+
+  box-shadow:0 12px 25px rgba(37,99,235,.25);
+}
+
+/* =====================================================
+   BOOKING TIP
+===================================================== */
+
+.booking-tip{
+
+  margin-top:45px;
+
+  background:white;
+
+  border-left:6px solid #2563eb;
+
+  padding:25px;
+
+  border-radius:16px;
+
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+  position:relative;
+
+  z-index:2;
+}
+
+.booking-tip h3{
+  margin-bottom:12px;
+  color:#1e293b;
+}
+
+.booking-tip p{
+  color:#64748b;
+  line-height:1.8;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width:900px){
+
+.user-dashboard{
+padding:25px;
+}
+
+.user-hero{
+flex-direction:column;
+text-align:center;
+gap:30px;
+}
+
+.hero-content h1{
+font-size:30px;
+}
+
+.hero-icon{
+width:75px;
+height:75px;
+font-size:34px;
+}
+
+}
+
+@media (max-width:600px){
+
+.user-dashboard{
+padding:18px;
+}
+
+.user-stats{
+grid-template-columns:1fr;
+}
+
+.user-cards{
+grid-template-columns:1fr;
+}
+
+.user-hero{
+padding:28px;
+}
+
+.hero-content h1{
+font-size:26px;
+}
+
+.section-title{
+font-size:24px;
+}
+
+.stat-card{
+padding:22px;
+}
+
+.user-card{
+padding:28px;
+}
+
+}

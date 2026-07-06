@@ -1,0 +1,234 @@
+/* ==========================================
+   USERS PAGE
+========================================== */
+
+.user-container {
+  max-width: 1300px;
+  margin: 30px auto;
+  padding: 25px;
+  font-family: Arial, sans-serif;
+}
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.users-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.users-header h1 {
+  margin: 0;
+  color: #1e293b;
+  font-size: 32px;
+}
+
+.users-header p {
+  color: #64748b;
+  margin-top: 8px;
+}
+
+.users-count {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: white;
+  padding: 18px 30px;
+  border-radius: 15px;
+  text-align: center;
+  min-width: 180px;
+  font-weight: bold;
+  box-shadow: 0 8px 18px rgba(0,0,0,.15);
+}
+
+.users-count span {
+  display: block;
+  font-size: 30px;
+  margin-top: 5px;
+}
+
+/* ==========================================
+   SEARCH
+========================================== */
+
+.users-toolbar {
+  margin: 25px 0;
+}
+
+.users-toolbar input {
+  width: 100%;
+  padding: 14px 18px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  font-size: 15px;
+  transition: .3s;
+}
+
+.users-toolbar input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 10px rgba(37,99,235,.25);
+}
+
+/* ==========================================
+   FORM
+========================================== */
+
+.user-container form {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,.08);
+  margin-bottom: 30px;
+}
+
+.user-container form h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.user-container label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #374151;
+}
+
+.user-container input,
+.user-container select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  margin-bottom: 18px;
+  font-size: 15px;
+}
+
+.user-container input:focus,
+.user-container select:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+/* ==========================================
+   TABLE
+========================================== */
+
+.user-container table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 8px 18px rgba(0,0,0,.08);
+}
+
+.user-container th {
+  background: #2563eb;
+  color: white;
+  padding: 16px;
+  font-size: 15px;
+}
+
+.user-container td {
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.user-container tr:nth-child(even) {
+  background: #f8fafc;
+}
+
+.user-container tr:hover {
+  background: #eef5ff;
+}
+
+/* ==========================================
+   ROLE BADGES
+========================================== */
+
+.role {
+  padding: 7px 16px;
+  border-radius: 20px;
+  color: white;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.role.admin {
+  background: #dc2626;
+}
+
+.role.user {
+  background: #16a34a;
+}
+
+/* ==========================================
+   BUTTONS
+========================================== */
+
+.edit-btn {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 9px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-right: 8px;
+  transition: .3s;
+}
+
+.edit-btn:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+.delete-btn {
+  background: #dc2626;
+  color: white;
+  border: none;
+  padding: 9px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.delete-btn:hover {
+  background: #b91c1c;
+  transform: translateY(-2px);
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width:900px) {
+
+  .users-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .users-count {
+    width: 100%;
+  }
+
+}
+
+@media (max-width:768px) {
+
+  .user-container {
+    padding: 15px;
+  }
+
+  .user-container table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+}

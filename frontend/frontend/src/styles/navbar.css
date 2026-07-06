@@ -1,0 +1,306 @@
+/* ==================================================
+   NAVBAR
+================================================== */
+
+.navbar{
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:18px 40px;
+
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(16px);
+
+    border-bottom:1px solid rgba(255,255,255,.6);
+
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+}
+
+/* ==================================================
+   LOGO
+================================================== */
+
+.navbar-logo{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.logo-icon{
+
+    width:55px;
+    height:55px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:16px;
+
+    font-size:28px;
+
+    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+
+    color:white;
+
+    box-shadow:0 8px 18px rgba(37,99,235,.30);
+}
+
+.navbar-logo h2{
+    margin:0;
+    color:#1e293b;
+    font-size:22px;
+    font-weight:700;
+}
+
+.navbar-logo p{
+    margin:3px 0 0;
+    color:#64748b;
+    font-size:13px;
+}
+
+/* ==================================================
+   NAV LINKS
+================================================== */
+
+.navbar-links{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    list-style:none;
+
+    margin:0;
+    padding:0;
+}
+
+.navbar-links li{
+    list-style:none;
+}
+
+.navbar-links a{
+
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+    padding:12px 18px;
+
+    text-decoration:none;
+
+    color:#475569;
+
+    font-weight:600;
+
+    border-radius:12px;
+
+    transition:.30s;
+}
+
+.navbar-links a svg{
+    font-size:17px;
+}
+
+.navbar-links a:hover{
+
+    background:#eef4ff;
+
+    color:#2563eb;
+}
+
+/* Active Link */
+
+.navbar-links a.active{
+
+    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+
+    color:white;
+
+    box-shadow:0 10px 20px rgba(37,99,235,.25);
+}
+
+/* ==================================================
+   USER
+================================================== */
+
+.navbar-user{
+
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+.user-info{
+
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.user-avatar{
+
+    width:45px;
+    height:45px;
+
+    padding:8px;
+
+    border-radius:50%;
+
+    background:#eef4ff;
+
+    color:#2563eb;
+
+    font-size:26px;
+}
+
+.user-info h4{
+
+    margin:0;
+
+    color:#1e293b;
+
+    font-size:15px;
+}
+
+.user-info span{
+
+    color:#64748b;
+
+    font-size:13px;
+}
+
+/* ==================================================
+   LOGOUT
+================================================== */
+
+.logout-btn{
+
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+    padding:11px 18px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:linear-gradient(135deg,#ef4444,#dc2626);
+
+    color:white;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.30s;
+}
+
+.logout-btn:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 12px 20px rgba(239,68,68,.28);
+}
+
+/* ==================================================
+   RESPONSIVE
+================================================== */
+
+@media(max-width:1100px){
+
+.navbar{
+
+    flex-direction:column;
+
+    gap:20px;
+
+    padding:25px;
+}
+
+.navbar-links{
+
+    flex-wrap:wrap;
+
+    justify-content:center;
+}
+
+.navbar-user{
+
+    width:100%;
+
+    justify-content:center;
+}
+
+}
+
+@media(max-width:768px){
+
+.navbar-logo{
+
+    flex-direction:column;
+
+    text-align:center;
+}
+
+.navbar-links{
+
+    width:100%;
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:12px;
+}
+
+.navbar-links a{
+
+    justify-content:center;
+}
+
+.navbar-user{
+
+    flex-direction:column;
+}
+
+.logout-btn{
+
+    width:100%;
+
+    justify-content:center;
+}
+
+}
+
+@media(max-width:500px){
+
+.navbar{
+
+    padding:18px;
+}
+
+.navbar-links{
+
+    grid-template-columns:1fr;
+}
+
+.logo-icon{
+
+    width:50px;
+    height:50px;
+}
+
+.navbar-logo h2{
+
+    font-size:20px;
+}
+
+}

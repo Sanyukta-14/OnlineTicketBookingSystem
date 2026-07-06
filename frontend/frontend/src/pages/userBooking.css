@@ -1,0 +1,82 @@
+.booking-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background: rgba(0,0,0,.5);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 999;
+}
+
+.booking-card {
+  background: white;
+  width: 420px;
+
+  border-radius: 12px;
+
+  padding: 30px;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+}
+
+.booking-card h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.booking-card p {
+  margin: 10px 0;
+}
+
+.booking-card label {
+  display: block;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.booking-card input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.booking-card h3 {
+  margin-top: 20px;
+  color: #1976d2;
+  text-align: center;
+}
+
+.booking-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
+}
+
+.booking-buttons button {
+  width: 48%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+}
+
+.booking-buttons button:first-child {
+  background: #1976d2;
+}
+
+.booking-buttons button:last-child {
+  background: #dc3545;
+}
+
+.booking-buttons button:hover {
+  opacity: 0.9;
+}

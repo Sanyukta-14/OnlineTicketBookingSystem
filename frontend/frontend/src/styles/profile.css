@@ -1,0 +1,381 @@
+/* ==================================================
+   PROFILE PAGE
+================================================== */
+
+.profile-page{
+    min-height:100vh;
+    padding:40px;
+    background:linear-gradient(135deg,#eef4ff 0%,#f8fbff 45%,#ffffff 100%);
+    position:relative;
+    overflow:hidden;
+}
+
+.profile-page::before{
+    content:"";
+    position:absolute;
+    width:420px;
+    height:420px;
+    border-radius:50%;
+    background:rgba(37,99,235,.08);
+    top:-170px;
+    right:-130px;
+    filter:blur(10px);
+}
+
+.profile-page::after{
+    content:"";
+    position:absolute;
+    width:340px;
+    height:340px;
+    border-radius:50%;
+    background:rgba(34,197,94,.08);
+    bottom:-140px;
+    left:-120px;
+    filter:blur(10px);
+}
+
+/* ==================================================
+   HERO
+================================================== */
+
+.profile-hero{
+    position:relative;
+    z-index:2;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:20px;
+
+    padding:35px 40px;
+
+    margin-bottom:35px;
+
+    border-radius:25px;
+
+    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+
+    color:white;
+
+    box-shadow:0 20px 45px rgba(37,99,235,.28);
+}
+
+.profile-hero h1{
+    margin:0;
+    font-size:36px;
+    font-weight:700;
+}
+
+.profile-hero p{
+    margin-top:10px;
+    color:#dbeafe;
+    line-height:1.8;
+    font-size:16px;
+}
+
+.profile-date{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    padding:14px 22px;
+
+    border-radius:14px;
+
+    background:rgba(255,255,255,.18);
+
+    backdrop-filter:blur(12px);
+
+    font-weight:600;
+
+    white-space:nowrap;
+}
+
+/* ==================================================
+   SUMMARY
+================================================== */
+
+.profile-summary{
+    position:relative;
+    z-index:2;
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+
+    margin-bottom:35px;
+}
+
+.summary-card{
+    background:rgba(255,255,255,.95);
+
+    backdrop-filter:blur(12px);
+
+    border-radius:20px;
+
+    padding:25px;
+
+    display:flex;
+    align-items:center;
+    gap:18px;
+
+    transition:.35s;
+
+    box-shadow:0 10px 28px rgba(0,0,0,.08);
+}
+
+.summary-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 35px rgba(37,99,235,.15);
+}
+
+.summary-icon{
+    width:72px;
+    height:72px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    border-radius:18px;
+
+    color:white;
+    font-size:30px;
+
+    flex-shrink:0;
+}
+
+.summary-icon.blue{
+    background:linear-gradient(135deg,#3b82f6,#2563eb);
+}
+
+.summary-icon.green{
+    background:linear-gradient(135deg,#22c55e,#15803d);
+}
+
+.summary-icon.orange{
+    background:linear-gradient(135deg,#fb923c,#ea580c);
+}
+
+.summary-card h4{
+    margin:0;
+    color:#64748b;
+    font-size:15px;
+    font-weight:600;
+}
+
+.summary-card h2{
+    margin-top:8px;
+    color:#0f172a;
+    font-size:28px;
+}
+
+/* ==================================================
+   PROFILE CARD
+================================================== */
+
+.profile-card{
+    position:relative;
+    z-index:2;
+
+    max-width:760px;
+    margin:auto;
+
+    background:rgba(255,255,255,.96);
+
+    backdrop-filter:blur(12px);
+
+    padding:40px;
+
+    border-radius:25px;
+
+    box-shadow:0 20px 45px rgba(0,0,0,.08);
+}
+
+/* ==================================================
+   PROFILE HEADER
+================================================== */
+
+.profile-header{
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.profile-avatar{
+    font-size:110px;
+    color:#2563eb;
+    margin-bottom:15px;
+}
+
+.profile-header h2{
+    margin:0;
+    color:#1e293b;
+    font-size:30px;
+}
+
+.profile-header p{
+    margin-top:10px;
+    color:#64748b;
+}
+
+/* ==================================================
+   FORM
+================================================== */
+
+.profile-group{
+    margin-bottom:24px;
+}
+
+.profile-group label{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    margin-bottom:10px;
+
+    color:#334155;
+
+    font-weight:600;
+}
+
+.profile-group input{
+    width:100%;
+
+    padding:15px 18px;
+
+    border-radius:12px;
+
+    border:1px solid #d9e3ef;
+
+    background:#f8fbff;
+
+    font-size:15px;
+
+    transition:.3s;
+
+    box-sizing:border-box;
+}
+
+.profile-group input:focus{
+    outline:none;
+    border-color:#2563eb;
+    background:white;
+    box-shadow:0 0 0 4px rgba(37,99,235,.12);
+}
+
+.profile-group input:disabled{
+    background:#edf2f7;
+    color:#64748b;
+    cursor:not-allowed;
+}
+
+/* ==================================================
+   SAVE BUTTON
+================================================== */
+
+.save-btn{
+    width:100%;
+
+    margin-top:15px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.35s;
+}
+
+.save-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 15px 30px rgba(37,99,235,.28);
+}
+
+.save-btn:active{
+    transform:scale(.98);
+}
+
+/* ==================================================
+   RESPONSIVE
+================================================== */
+
+@media (max-width:900px){
+
+.profile-page{
+    padding:25px;
+}
+
+.profile-hero{
+    flex-direction:column;
+    align-items:flex-start;
+}
+
+.profile-summary{
+    grid-template-columns:1fr;
+}
+
+.profile-card{
+    padding:30px;
+}
+
+}
+
+@media (max-width:600px){
+
+.profile-page{
+    padding:18px;
+}
+
+.profile-hero{
+    padding:25px;
+}
+
+.profile-hero h1{
+    font-size:28px;
+}
+
+.profile-date{
+    width:100%;
+    justify-content:center;
+}
+
+.profile-card{
+    padding:24px;
+}
+
+.profile-avatar{
+    font-size:85px;
+}
+
+.summary-card{
+    padding:20px;
+}
+
+.summary-icon{
+    width:60px;
+    height:60px;
+    font-size:24px;
+}
+
+.summary-card h2{
+    font-size:24px;
+}
+
+}
