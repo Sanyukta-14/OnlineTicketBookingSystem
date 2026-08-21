@@ -21,14 +21,18 @@ import com.ticketbooking.service.AdminService;
 @RestController
 @RequestMapping("/admin")
 @CrossOrigin(
-        origins = "http://localhost:5173",
+        origins = {
+                "http://localhost:3000",
+                "http://localhost:5173"
+        },
         methods = {
                 RequestMethod.GET,
                 RequestMethod.POST,
                 RequestMethod.PUT,
                 RequestMethod.DELETE,
                 RequestMethod.OPTIONS
-        }
+        },
+        allowedHeaders = "*"
 )
 public class AdminController {
 
@@ -39,8 +43,7 @@ public class AdminController {
     // CONSTRUCTOR
     // =========================================================
 
-    public AdminController(
-            AdminService adminService) {
+    public AdminController(AdminService adminService) {
 
         this.adminService = adminService;
     }
@@ -54,30 +57,81 @@ public class AdminController {
     // Request:
     //
     // {
-    //     "email": "admin@gmail.com",
-    //     "password": "123456"
+    //     "email": "admin@ticketbook.com",
+    //     "password": "your-password"
     // }
     //
     // =========================================================
 
     @PostMapping("/login")
-    public ResponseEntity<User> adminLogin(
+    public ResponseEntity<?> adminLogin(
             @RequestBody LoginRequest request) {
 
-        if (request == null) {
+        try {
 
-            throw new RuntimeException(
-                    "Admin login information is required."
-            );
+            if (request == null) {
+
+                return ResponseEntity
+                        .badRequest()
+                        .body("Admin login information is required.");
+            }
+
+            if (request.getEmail() == null
+                    || request.getEmail().trim().isEmpty()) {
+
+                return ResponseEntity
+                        .badRequest()
+                        .body("Email is required.");
+            }
+
+            if (request.getPassword() == null
+                    || request.getPassword().trim().isEmpty()) {
+
+                return ResponseEntity
+                        .badRequest()
+                        .body("Password is required.");
+            }
+
+
+            User admin =
+                    adminService.adminLogin(
+                            request.getEmail().trim().toLowerCase(),
+                            request.getPassword().trim()
+                    );
+
+
+            if (admin == null) {
+
+                return ResponseEntity
+                        .status(HttpStatus.UNAUTHORIZED)
+                        .body("Invalid administrator credentials.");
+            }
+
+
+            // Make sure only ADMIN accounts can use this endpoint.
+
+            if (admin.getRole() == null
+                    || !"ADMIN".equalsIgnoreCase(
+                            admin.getRole().toString())) {
+
+                return ResponseEntity
+                        .status(HttpStatus.FORBIDDEN)
+                        .body("Access denied. Administrator account required.");
+            }
+
+
+            return ResponseEntity.ok(admin);
+
+        } catch (RuntimeException error) {
+
+            return ResponseEntity
+                    .status(HttpStatus.UNAUTHORIZED)
+                    .body(
+                            error.getMessage() != null
+                                    ? error.getMessage()
+                                    : "Invalid administrator credentials."
+                    );
         }
-
-        User admin =
-                adminService.adminLogin(
-                        request.getEmail(),
-                        request.getPassword()
-                );
-
-        return ResponseEntity.ok(admin);
     }
 
 
@@ -85,6 +139,7 @@ public class AdminController {
     // GET ALL USERS
     //
     // GET /admin/users
+    //
     // =========================================================
 
     @GetMapping("/users")
@@ -101,6 +156,7 @@ public class AdminController {
     // GET TOTAL USERS
     //
     // GET /admin/users/count
+    //
     // =========================================================
 
     @GetMapping("/users/count")
@@ -117,6 +173,7 @@ public class AdminController {
     // GET TOTAL ADMINS
     //
     // GET /admin/admins/count
+    //
     // =========================================================
 
     @GetMapping("/admins/count")
@@ -135,17 +192,31 @@ public class AdminController {
     // DELETE /admin/users/{id}
     //
     // ADMIN accounts cannot be deleted.
+    //
     // =========================================================
 
     @DeleteMapping("/users/{id}")
-    public ResponseEntity<Void> deleteUser(
+    public ResponseEntity<?> deleteUser(
             @PathVariable Long id) {
 
-        adminService.deleteUser(id);
+        try {
 
-        return ResponseEntity
-                .status(HttpStatus.NO_CONTENT)
-                .build();
+            adminService.deleteUser(id);
+
+            return ResponseEntity
+                    .noContent()
+                    .build();
+
+        } catch (RuntimeException error) {
+
+            return ResponseEntity
+                    .badRequest()
+                    .body(
+                            error.getMessage() != null
+                                    ? error.getMessage()
+                                    : "Unable to delete user."
+                    );
+        }
     }
 
 
@@ -169,24 +240,55 @@ public class AdminController {
     // =========================================================
 
     @PutMapping("/users/{id}/role")
-    public ResponseEntity<User> changeUserRole(
+    public ResponseEntity<?> changeUserRole(
             @PathVariable Long id,
             @RequestBody RoleRequest request) {
 
-        if (request == null) {
+        try {
 
-            throw new RuntimeException(
-                    "Role information is required."
-            );
+            if (request == null
+                    || request.getRole() == null
+                    || request.getRole().trim().isEmpty()) {
+
+                return ResponseEntity
+                        .badRequest()
+                        .body("Role information is required.");
+            }
+
+
+            String role =
+                    request.getRole()
+                            .trim()
+                            .toUpperCase();
+
+
+            if (!role.equals("ADMIN")
+                    && !role.equals("USER")) {
+
+                return ResponseEntity
+                        .badRequest()
+                        .body("Role must be either ADMIN or USER.");
+            }
+
+
+            User updatedUser =
+                    adminService.changeUserRole(
+                            id,
+                            role
+                    );
+
+            return ResponseEntity.ok(updatedUser);
+
+        } catch (RuntimeException error) {
+
+            return ResponseEntity
+                    .badRequest()
+                    .body(
+                            error.getMessage() != null
+                                    ? error.getMessage()
+                                    : "Unable to change user role."
+                    );
         }
-
-        User updatedUser =
-                adminService.changeUserRole(
-                        id,
-                        request.getRole()
-                );
-
-        return ResponseEntity.ok(updatedUser);
     }
 
 
@@ -201,17 +303,17 @@ public class AdminController {
         private String password;
 
 
-        // -----------------------------------------------------
+        // =====================================================
         // DEFAULT CONSTRUCTOR
-        // -----------------------------------------------------
+        // =====================================================
 
         public LoginRequest() {
         }
 
 
-        // -----------------------------------------------------
+        // =====================================================
         // GET EMAIL
-        // -----------------------------------------------------
+        // =====================================================
 
         public String getEmail() {
 
@@ -219,9 +321,9 @@ public class AdminController {
         }
 
 
-        // -----------------------------------------------------
+        // =====================================================
         // SET EMAIL
-        // -----------------------------------------------------
+        // =====================================================
 
         public void setEmail(String email) {
 
@@ -229,9 +331,9 @@ public class AdminController {
         }
 
 
-        // -----------------------------------------------------
+        // =====================================================
         // GET PASSWORD
-        // -----------------------------------------------------
+        // =====================================================
 
         public String getPassword() {
 
@@ -239,9 +341,9 @@ public class AdminController {
         }
 
 
-        // -----------------------------------------------------
+        // =====================================================
         // SET PASSWORD
-        // -----------------------------------------------------
+        // =====================================================
 
         public void setPassword(String password) {
 
@@ -259,17 +361,17 @@ public class AdminController {
         private String role;
 
 
-        // -----------------------------------------------------
+        // =====================================================
         // DEFAULT CONSTRUCTOR
-        // -----------------------------------------------------
+        // =====================================================
 
         public RoleRequest() {
         }
 
 
-        // -----------------------------------------------------
+        // =====================================================
         // GET ROLE
-        // -----------------------------------------------------
+        // =====================================================
 
         public String getRole() {
 
@@ -277,9 +379,9 @@ public class AdminController {
         }
 
 
-        // -----------------------------------------------------
+        // =====================================================
         // SET ROLE
-        // -----------------------------------------------------
+        // =====================================================
 
         public void setRole(String role) {
 
