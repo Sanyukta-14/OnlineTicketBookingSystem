@@ -20,16 +20,37 @@ import com.ticketbooking.entity.User;
 import com.ticketbooking.service.UserService;
 
 @RestController
-@RequestMapping("/users")
+
+/*
+ * Support BOTH API paths:
+ *
+ * http://localhost:8080/users
+ *
+ * and
+ *
+ * http://localhost:8080/api/users
+ *
+ * This allows the existing frontend code to work
+ * whether it uses /users or /api/users.
+ */
+@RequestMapping({
+        "/users",
+        "/api/users"
+})
+
 @CrossOrigin(
-        origins = "http://localhost:5173",
+        origins = {
+                "http://localhost:3000",
+                "http://localhost:5173"
+        },
         methods = {
                 RequestMethod.GET,
                 RequestMethod.POST,
                 RequestMethod.PUT,
                 RequestMethod.DELETE,
                 RequestMethod.OPTIONS
-        }
+        },
+        allowedHeaders = "*"
 )
 public class UserController {
 
@@ -50,9 +71,7 @@ public class UserController {
     // CREATE USER / REGISTER
     //
     // POST /users
-    //
-    // Normal registration always creates USER.
-    // The frontend cannot create an ADMIN.
+    // POST /api/users
     // =========================================================
 
     @PostMapping
@@ -81,6 +100,7 @@ public class UserController {
     // LOGIN
     //
     // POST /users/login
+    // POST /api/users/login
     // =========================================================
 
     @PostMapping("/login")
@@ -96,9 +116,25 @@ public class UserController {
                         .body("Login information is required.");
             }
 
+            if (request.getEmail() == null ||
+                    request.getEmail().trim().isEmpty()) {
+
+                return ResponseEntity
+                        .badRequest()
+                        .body("Email is required.");
+            }
+
+            if (request.getPassword() == null ||
+                    request.getPassword().trim().isEmpty()) {
+
+                return ResponseEntity
+                        .badRequest()
+                        .body("Password is required.");
+            }
+
             User user =
                     userService.login(
-                            request.getEmail(),
+                            request.getEmail().trim().toLowerCase(),
                             request.getPassword()
                     );
 
@@ -117,15 +153,25 @@ public class UserController {
     // GET ALL USERS
     //
     // GET /users
+    // GET /api/users
     // =========================================================
 
     @GetMapping
-    public ResponseEntity<List<User>> getAllUsers() {
+    public ResponseEntity<?> getAllUsers() {
 
-        List<User> users =
-                userService.getAllUsers();
+        try {
 
-        return ResponseEntity.ok(users);
+            List<User> users =
+                    userService.getAllUsers();
+
+            return ResponseEntity.ok(users);
+
+        } catch (RuntimeException error) {
+
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(error.getMessage());
+        }
     }
 
 
@@ -133,6 +179,7 @@ public class UserController {
     // GET USER BY ID
     //
     // GET /users/{id}
+    // GET /api/users/{id}
     // =========================================================
 
     @GetMapping("/{id}")
@@ -159,6 +206,7 @@ public class UserController {
     // GET USER BY EMAIL
     //
     // GET /users/profile?email=example@gmail.com
+    // GET /api/users/profile?email=example@gmail.com
     // =========================================================
 
     @GetMapping("/profile")
@@ -168,7 +216,9 @@ public class UserController {
         try {
 
             User user =
-                    userService.getUserByEmail(email);
+                    userService.getUserByEmail(
+                            email.trim().toLowerCase()
+                    );
 
             return ResponseEntity.ok(user);
 
@@ -185,8 +235,7 @@ public class UserController {
     // UPDATE USER
     //
     // PUT /users/{id}
-    //
-    // Role cannot be changed here.
+    // PUT /api/users/{id}
     // =========================================================
 
     @PutMapping("/{id}")
@@ -209,8 +258,8 @@ public class UserController {
             String message =
                     error.getMessage();
 
-            if (message != null
-                    && message.toLowerCase()
+            if (message != null &&
+                    message.toLowerCase()
                             .contains("already exists")) {
 
                 return ResponseEntity
@@ -218,8 +267,8 @@ public class UserController {
                         .body(message);
             }
 
-            if (message != null
-                    && message.toLowerCase()
+            if (message != null &&
+                    message.toLowerCase()
                             .contains("not found")) {
 
                 return ResponseEntity
@@ -238,6 +287,7 @@ public class UserController {
     // DELETE USER
     //
     // DELETE /users/{id}
+    // DELETE /api/users/{id}
     // =========================================================
 
     @DeleteMapping("/{id}")
@@ -257,8 +307,8 @@ public class UserController {
             String message =
                     error.getMessage();
 
-            if (message != null
-                    && message.toLowerCase()
+            if (message != null &&
+                    message.toLowerCase()
                             .contains("not found")) {
 
                 return ResponseEntity
@@ -274,7 +324,7 @@ public class UserController {
 
 
     // =========================================================
-    // LOGIN REQUEST
+    // LOGIN REQUEST CLASS
     // =========================================================
 
     public static class LoginRequest {
